@@ -17,12 +17,4 @@ RUN mkdir -p /var/cache/apk \
     && ln -s /var/cache/apk /etc/apk/cache \
     && rm -rf /var/cache/apk/*
 
-ARG USER=default
-ENV HOME=/home/$USER
-
-RUN adduser -D $USER \
-    && echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER \
-    && chmod 0440 /etc/sudoers.d/$USER
-
-USER $USER
-WORKDIR $HOME
+USER root
