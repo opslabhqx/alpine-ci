@@ -11,7 +11,7 @@ variable "TAG" {
 }
 
 group "default" {
-  targets = ["build-docker"]
+  targets = ["build"]
 }
 
 target "settings" {
