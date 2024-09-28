@@ -53,7 +53,7 @@ jobs:
           echo "FILE=${FILE,,}" >> $GITHUB_ENV
           echo "FILE=${FILE,,}"
 
-          TAG=$(sed -n 's/^ARG BASE_VERSION=\([0-9.]*\).*/\1/p' Dockerfile)
+          TAG=$(sed -n 's/^ARG BASE_VERSION=v\?\([0-9.]*\).*/\1/p' Dockerfile)
           echo "TAG=${TAG#v}" >> $GITHUB_ENV
           echo "TAG=${TAG#v}"
 
