@@ -53,9 +53,9 @@ jobs:
           echo "FILE=${FILE,,}" >> $GITHUB_ENV
           echo "FILE=${FILE,,}"
 
-          TAG=$(grep -oP '^ARG ALPINE_VERSION=\K.*' Dockerfile)
-          echo "TAG=${TAG,,#v}" >> $GITHUB_ENV
-          echo "TAG=${TAG,,#v}"
+          TAG=$(sed -n 's/^ARG IMAGE_VERSION=\([0-9.]*\).*/\1/p' Dockerfile)
+          echo "TAG=${TAG#v}" >> $GITHUB_ENV
+          echo "TAG=${TAG#v}"
 
       - name: Push
         uses: docker/bake-action@e626c7390c9f95508a135a89e65ec698e061fb2a # v5
