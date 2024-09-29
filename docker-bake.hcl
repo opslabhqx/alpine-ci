@@ -41,10 +41,8 @@ target "build" {
   inherits = ["settings"]
   output   = ["type=docker"]
   tags = [
-    "ghcr.io/${OWNER}x/${FILE}",
-    "ghcr.io/${OWNER}x/${FILE}:${TAG}",
-    "${OWNER}/${FILE}:${TAG}",
-    "${OWNER}/${FILE}",
+    "${OWNER}/${FILE}-${GROUP}",
+    "${OWNER}/${FILE}-${GROUP}:${TAG}",
   ]
 }
 
@@ -61,7 +59,7 @@ target "push" {
     "ghcr.io/${OWNER}x/${FILE}-${GROUP}",
     "ghcr.io/${OWNER}x/${FILE}-${GROUP}:${TAG}",
     "public.ecr.aws/${OWNER}/${GROUP}/${FILE}",
-    "public.ecr.aws/${OWNER}/${GROUP}/${FILE}:${TAG}"
+    "public.ecr.aws/${OWNER}/${GROUP}/${FILE}:${TAG}",
   ]
 }
 
@@ -78,7 +76,7 @@ target "push-rootless" {
     "ghcr.io/${OWNER}x/${FILE}-${GROUP}:rootless",
     "ghcr.io/${OWNER}x/${FILE}-${GROUP}:${TAG}-rootless",
     "public.ecr.aws/${OWNER}/${GROUP}/${FILE}:rootless",
-    "public.ecr.aws/${OWNER}/${GROUP}/${FILE}:${TAG}-rootless"
+    "public.ecr.aws/${OWNER}/${GROUP}/${FILE}:${TAG}-rootless",
   ]
   dockerfile = "./Dockerfile.rootless"
 }
