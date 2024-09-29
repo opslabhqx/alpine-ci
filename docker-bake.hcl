@@ -2,8 +2,12 @@ variable "OWNER" {
   default = "opslabhq"
 }
 
+variable "GROUP" {
+  default = "ci"
+}
+
 variable "FILE" {
-  default = "alpine-ci"
+  default = "alpine"
 }
 
 variable "TAG" {
@@ -52,10 +56,12 @@ target "push" {
     "linux/arm64",
   ]
   tags = [
-    "ghcr.io/${OWNER}x/${FILE}",
-    "ghcr.io/${OWNER}x/${FILE}:${TAG}",
-    "${OWNER}/${FILE}:${TAG}",
-    "${OWNER}/${FILE}",
+    "${OWNER}/${FILE}-${GROUP}",
+    "${OWNER}/${FILE}-${GROUP}:${TAG}",
+    "ghcr.io/${OWNER}x/${FILE}-${GROUP}",
+    "ghcr.io/${OWNER}x/${FILE}-${GROUP}:${TAG}",
+    "public.ecr.aws/${OWNER}/${GROUP}/${FILE}",
+    "public.ecr.aws/${OWNER}/${GROUP}/${FILE}:${TAG}"
   ]
 }
 
@@ -67,10 +73,12 @@ target "push-rootless" {
     "linux/arm64",
   ]
   tags = [
-    "ghcr.io/${OWNER}x/${FILE}:rootless",
-    "ghcr.io/${OWNER}x/${FILE}:${TAG}-rootless",
-    "${OWNER}/${FILE}:${TAG}-rootless",
-    "${OWNER}/${FILE}:rootless",
+    "${OWNER}/${FILE}-${GROUP}:rootless",
+    "${OWNER}/${FILE}-${GROUP}:${TAG}-rootless",
+    "ghcr.io/${OWNER}x/${FILE}-${GROUP}:rootless",
+    "ghcr.io/${OWNER}x/${FILE}-${GROUP}:${TAG}-rootless",
+    "public.ecr.aws/${OWNER}/${GROUP}/${FILE}:rootless",
+    "public.ecr.aws/${OWNER}/${GROUP}/${FILE}:${TAG}-rootless"
   ]
   dockerfile = "./Dockerfile.rootless"
 }
