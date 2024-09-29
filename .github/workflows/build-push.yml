@@ -44,6 +44,19 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GH_SECRET }}
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN_ECR_PUBLIC }}
+          role-session-name: "GitHubActions-${{ github.event.repository.owner.login }}-${{ github.event.repository.name }}-${{ github.run_id }}"
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076 # v2
+        with:
+          registry-type: public
+
       - name: Extract version from Dockerfile
         id: extract_version
         run: |
