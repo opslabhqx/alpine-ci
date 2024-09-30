@@ -29,6 +29,6 @@ jobs:
         uses: docker/setup-buildx-action@988b5a0280414f521da01fcc63a27aeeb4b104db # v3
 
       - name: Test
-        uses: docker/bake-action@e626c7390c9f95508a135a89e65ec698e061fb2a # v5
+        uses: docker/bake-action@64673bcfac9f7517fc75e79db735fdb62efe6c55 # v5
         with:
           targets: test
