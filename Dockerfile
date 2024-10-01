@@ -3,7 +3,7 @@
 # renovate: datasource=docker depName=opslabhq/alpine
 ARG BASE_VERSION=3.20.3@sha256:175ef1d69f5ea2cf8f7c5e8150fe83ca4e8a4241e32237e3962ce8163de41181
 
-FROM opslabhq/alpine:${BASE_VERSION} AS base
+FROM opslabhq/alpine:${BASE_VERSION:-latest} AS base
 
 LABEL maintainer="Anthony Yung <yhs88a@gmail.com>" \
     org.opencontainers.image.source="https://github.com/opslabhqx/alpine-ci"
