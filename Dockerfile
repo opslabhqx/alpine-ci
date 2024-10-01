@@ -9,12 +9,12 @@ LABEL maintainer="Anthony Yung <yhs88a@gmail.com>" \
     org.opencontainers.image.source="https://github.com/opslabhqx/alpine-ci"
 
 RUN apk add --no-cache sudo bash git aws-cli curl ca-certificates jq \
-    && ln -s $(which aws) /usr/local/bin/aws-cli
+    && ln -fs $(which aws) /usr/local/bin/aws-cli
 
 FROM base AS final
 
 RUN mkdir -p /var/cache/apk \
-    && ln -s /var/cache/apk /etc/apk/cache \
+    && ln -fs /var/cache/apk /etc/apk/cache \
     && rm -rf /var/cache/apk/*
 
 USER root
